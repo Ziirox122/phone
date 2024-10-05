@@ -1,0 +1,18 @@
+RegisterCommand('restartui', function()
+    SendReactMessage('App:Restart')
+	SetNuiFocusKeepInput(false)
+    SetNuiFocus(false, false)
+    TriggerEvent('fb-phone:restartui')
+end, true)
+
+RegisterNUICallback('Error:Catch', function(data, cb)
+    TriggerServerEvent('fb-phone:uierror', data)
+    cb('ok')
+end)
+
+RegisterNUICallback('Error:CrashRestart', function(data, cb)
+	SetNuiFocusKeepInput(false)
+    SetNuiFocus(false, false)
+    TriggerEvent('fb-phone:restartui')
+    cb('ok')
+end)
